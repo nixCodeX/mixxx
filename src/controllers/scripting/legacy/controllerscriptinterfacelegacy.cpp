@@ -420,15 +420,19 @@ void ControllerScriptInterfaceLegacy::log(const QString& message) {
 int ControllerScriptInterfaceLegacy::beginTimer(
         int intervalMillis, QJSValue timerCallback, bool oneShot) {
     if (timerCallback.isString()) {
+        auto timerCallbackStr = timerCallback.toString();
         timerCallback = m_pScriptEngineLegacy->jsEngine()->evaluate(timerCallback.toString());
-    } else if (!timerCallback.isCallable()) {
+        qDebug() << "Evaluated string callback:" << timerCallbackStr << ":" << timerCallback.toString();
+    }
+    
+    if (!timerCallback.isCallable()) {
         QString sErrorMessage(
                 "Invalid timer callback provided to engine.beginTimer. Valid "
                 "callbacks are strings and functions. "
                 "Make sure that your code contains no syntax errors.");
-        if (timerCallback.isError()) {
+        //if (timerCallback.isError()) {
             sErrorMessage.append("\n" + timerCallback.toString());
-        }
+        //}
         m_pScriptEngineLegacy->throwJSError(sErrorMessage);
         return 0;
     }

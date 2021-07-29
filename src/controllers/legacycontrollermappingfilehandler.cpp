@@ -4,6 +4,7 @@
 #include "controllers/defs_controllers.h"
 #include "controllers/hid/legacyhidcontrollermappingfilehandler.h"
 #include "controllers/midi/legacymidicontrollermappingfilehandler.h"
+#include "controllers/osc/legacyosccontrollermappingfilehandler.h"
 
 namespace {
 
@@ -48,6 +49,9 @@ std::shared_ptr<LegacyControllerMapping> LegacyControllerMappingFileHandler::loa
             mappingFile.fileName().endsWith(
                     BULK_MAPPING_EXTENSION, Qt::CaseInsensitive)) {
         pHandler = new LegacyHidControllerMappingFileHandler();
+    } else if (mappingFile.fileName().endsWith(
+                       OSC_MAPPING_EXTENSION, Qt::CaseInsensitive)) {
+        pHandler = new LegacyOscControllerMappingFileHandler();
     }
 
     if (pHandler == nullptr) {

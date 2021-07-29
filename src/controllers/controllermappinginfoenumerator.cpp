@@ -39,6 +39,8 @@ QList<MappingInfo> MappingInfoEnumerator::getMappingsByExtension(const QString& 
         return m_hidMappings;
     } else if (extension == BULK_MAPPING_EXTENSION) {
         return m_bulkMappings;
+    } else if (extension == OSC_MAPPING_EXTENSION) {
+        return m_oscMappings;
     }
 
     qDebug() << "Extension not registered to mappinginfo" << extension;
@@ -49,6 +51,7 @@ void MappingInfoEnumerator::loadSupportedMappings() {
     m_midiMappings.clear();
     m_hidMappings.clear();
     m_bulkMappings.clear();
+    m_oscMappings.clear();
 
     for (const QString& dirPath : qAsConst(m_controllerDirPaths)) {
         QDirIterator it(dirPath);
@@ -62,6 +65,8 @@ void MappingInfoEnumerator::loadSupportedMappings() {
                 m_hidMappings.append(MappingInfo(path));
             } else if (path.endsWith(BULK_MAPPING_EXTENSION, Qt::CaseInsensitive)) {
                 m_bulkMappings.append(MappingInfo(path));
+            } else if (path.endsWith(OSC_MAPPING_EXTENSION, Qt::CaseInsensitive)) {
+                m_oscMappings.append(MappingInfo(path));
             }
         }
     }
@@ -69,6 +74,7 @@ void MappingInfoEnumerator::loadSupportedMappings() {
     std::sort(m_midiMappings.begin(), m_midiMappings.end(), mappingInfoNameComparator);
     std::sort(m_hidMappings.begin(), m_hidMappings.end(), mappingInfoNameComparator);
     std::sort(m_bulkMappings.begin(), m_bulkMappings.end(), mappingInfoNameComparator);
+    std::sort(m_oscMappings.begin(), m_oscMappings.end(), mappingInfoNameComparator);
 
     qDebug() << "Extension" << MIDI_MAPPING_EXTENSION << "total"
              << m_midiMappings.length() << "mappings";
@@ -76,4 +82,6 @@ void MappingInfoEnumerator::loadSupportedMappings() {
              << m_hidMappings.length() << "mappings";
     qDebug() << "Extension" << BULK_MAPPING_EXTENSION << "total"
              << m_bulkMappings.length() << "mappings";
+    qDebug() << "Extension" << OSC_MAPPING_EXTENSION << "total"
+             << m_oscMappings.length() << "mappings";
 }

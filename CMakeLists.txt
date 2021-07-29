@@ -482,6 +482,12 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/controllers/midi/midiutils.cpp
   src/controllers/midi/portmidicontroller.cpp
   src/controllers/midi/portmidienumerator.cpp
+  src/controllers/osc/legacyosccontrollermapping.cpp
+  src/controllers/osc/legacyosccontrollermappingfilehandler.cpp
+  src/controllers/osc/osc.cpp
+  src/controllers/osc/osccontroller.cpp
+  src/controllers/osc/oscenumerator.cpp
+  src/controllers/osc/oscoutputhandler.cpp
   src/controllers/softtakeover.cpp
   src/database/mixxxdb.cpp
   src/database/schemamanager.cpp

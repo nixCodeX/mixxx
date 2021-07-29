@@ -22,6 +22,8 @@
 #include "controllers/bulk/bulkenumerator.h"
 #endif
 
+#include "controllers/osc/oscenumerator.h"
+
 // http://developer.qt.nokia.com/wiki/Threads_Events_QObjects
 
 // Poll every 1ms (where possible) for good controller response
@@ -155,6 +157,7 @@ void ControllerManager::slotInitialize() {
 #ifdef __HID__
     m_enumerators.append(new HidEnumerator());
 #endif
+    m_enumerators.append(new OscEnumerator());
 }
 
 void ControllerManager::slotShutdown() {

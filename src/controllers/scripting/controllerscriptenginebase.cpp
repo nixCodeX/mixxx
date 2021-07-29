@@ -76,7 +76,7 @@ bool ControllerScriptEngineBase::executeFunction(
     // If it's not a function, we're done.
     if (!functionObject.isCallable()) {
         qDebug() << "ControllerScriptHandlerBase::executeFunction:"
-                 << functionObject.toVariant() << "Not a function";
+                 << functionObject.toString() << "/" << functionObject.toVariant() << "Not a function";
         return false;
     }
 
